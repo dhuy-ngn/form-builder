@@ -18,20 +18,12 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        elements: {
-          formButtonPrimary: 'bg-primary hover:bg-primary-focus text-primary-foreground normal-case text-sm',
-          formFieldErrorText: 'text-error',
-          formFieldWarningText: 'text-warning',
-          formFieldSuccessText: 'text-success',
-          footerActionLink: 'text-primary hover:text-primary-focus',
-          identityPreviewEditButton: 'text-primary hover:text-primary-focus',
-          formResendCodeLink: 'text-primary hover:text-primary-focus',
-          profileSectionPrimaryButton: 'text-primary',
-          badge: 'bg-primary text-primary-foreground',
-          avatarImageActionsUpload: 'text-primary',
-          avatarImageActionsRemove: 'text-error',
-          formButtonReset: 'hover:bg-primary text-primary hover:text-primary-foreground normal-case',
-          userPreviewMainIdentifier: "text-muted-focus",
+        variables: {
+          colorPrimary: 'hsl(206 93% 64%)',
+          colorDanger: 'hsl(4 93% 58%)',
+          colorSuccess: 'hsl(147 83% 44%)',
+          colorWarning: 'hsl(44 100% 62%)',
+          colorTextOnPrimaryBackground: 'hsl(0 0% 100%)',
         },
         layout: {
           socialButtonsPlacement: 'bottom',

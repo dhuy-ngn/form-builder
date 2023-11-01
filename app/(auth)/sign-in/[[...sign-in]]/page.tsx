@@ -1,5 +1,9 @@
 import { SignIn } from "@clerk/nextjs";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'Form Builder - Sign in',
+};
 
 function SignInPage() {
   return (
