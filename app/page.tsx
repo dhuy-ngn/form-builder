@@ -1,14 +1,12 @@
 "use client";
 
-import RichTextEditor from '@/components/RichTextEditor';
-import { ThemeToggler } from '@/components/ui/theme-toggler';
+import { SignOutButton, UserProfile } from "@clerk/nextjs";
 
 export default function Home() {
   return (
     <main>
-      <RichTextEditor onChange={() => { }} />
-      <ThemeToggler
-        className='bg-transparent hover:bg-muted-focus border-none' />
+      <SignOutButton />
+      <UserProfile />
     </main>
   );
 }
