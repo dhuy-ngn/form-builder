@@ -4,7 +4,7 @@ import '../../app/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
