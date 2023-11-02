@@ -31,6 +31,6 @@ export const components: Stats[] = [
     title: 'Bounce Rate',
     description: 'Visits that leaves without interacting',
     valueKey: 'bounceRate',
-    className: 'border-error/40 border-b-error'
+    className: 'border-destructive/40 border-b-destructive'
   }
 ];

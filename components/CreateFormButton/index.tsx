@@ -4,8 +4,9 @@ import { CreateForm } from "@/actions/FormActions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { FilePlus, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { FormSchema, FormSchemaType } from "../../types/form";
+import { FormSchema, FormSchemaType } from "../../schemas/form";
 import { Button } from "../ui/button";
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
@@ -17,6 +18,7 @@ function CreateFormButton() {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema)
   });
+  const router = useRouter();
 
   async function onSubmit(values: FormSchemaType) {
     try {
@@ -25,12 +27,14 @@ function CreateFormButton() {
         title: "Success",
         description: "Form created successfully"
       });
+      router.push(`/forms/${formId}/build`);
     } catch (error) {
       toast({
         title: "An unexpected error occured",
         description: "Something went wrong, please try again later",
         variant: "destructive"
       });
+      console.log({ error });
     }
   }
 

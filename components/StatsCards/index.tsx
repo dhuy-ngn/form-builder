@@ -15,8 +15,9 @@ function StatsCards({
     <div
       className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8 mt-4">
       {
-        components.map(component =>
+        components.map((component, index) =>
           <StatsCard
+            key={index}
             {...component}
             value={data?.[component.valueKey]}
             loading={loading} />)

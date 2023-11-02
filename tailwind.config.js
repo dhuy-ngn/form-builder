@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const heropatterns = require('tailwindcss-hero-patterns/src/patterns');
+
 module.exports = {
   darkMode: ['class'],
   content: [
@@ -8,6 +10,12 @@ module.exports = {
     './src/**/*.{ts,tsx}'
   ],
   theme: {
+    heroPatterns: {
+      graphpaper: heropatterns.graphpaper
+    },
+    heroPatternsColor: ['muted'],
+    heroPatternsShade: ['focus'],
+    heroPatternsOpacities: ['0', '20', '50', '70'],
     container: {
       center: true,
       padding: '2rem',
@@ -54,9 +62,9 @@ module.exports = {
           DEFAULT: 'hsl(var(--warning))',
           foreground: 'hsl(var(--warning-foreground))'
         },
-        error: {
-          DEFAULT: 'hsl(var(--error))',
-          foreground: 'hsl(var(--error-foreground))'
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))'
         },
         success: {
           DEFAULT: 'hsl(var(--success))',
@@ -84,5 +92,8 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwindcss-hero-patterns')
+  ]
 };
