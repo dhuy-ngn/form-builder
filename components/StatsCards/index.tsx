@@ -1,4 +1,4 @@
-import { GetFormStats } from "@/actions/GetFormStats";
+import { GetFormStats } from "@/actions/FormActions";
 import StatsCard from "../StatsCard";
 import { components } from "./components";
 
@@ -13,7 +13,7 @@ function StatsCards({
 }: StatsCardsProps) {
   return (
     <div
-      className="flex flex-row gap-6 mx-4 flex-wrap">
+      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8 mt-4">
       {
         components.map(component =>
           <StatsCard

@@ -1,16 +1,22 @@
-import StatsCardWrapper from "@/components/StatsCardWrapper";
-import StatsCards from "@/components/StatsCardWrapper/StatsCards";
+import CreateFormButton from "@/components/CreateFormButton";
+import StatsCards from "@/components/StatsCards";
+import StatsCardWrapper from "@/components/StatsCardsWrapper";
 import { Suspense } from "react";
 
 export default function Home() {
 
   return (
-    <div>
+    <div
+      className="container">
       <Suspense fallback={
         <StatsCards loading={true} />
       }>
         <StatsCardWrapper />
       </Suspense>
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <CreateFormButton />
+      </div>
     </div>
   );
 }

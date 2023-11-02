@@ -1,5 +1,5 @@
 import NavBar from '@/components/NavBar';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import { Inter } from 'next/font/google';
 import '../../app/globals.css';
 

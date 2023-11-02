@@ -1,8 +1,8 @@
-import { GetFormStats } from "@/actions/GetFormStats";
+import { GetFormStats } from "@/actions/FormActions";
 import { currentUser } from "@clerk/nextjs";
-import StatsCards from "./StatsCards";
+import StatsCards from "../StatsCards";
 
-async function StatsCardWrapper() {
+async function StatsCardsWrapper() {
   const data = await GetFormStats();
   const user = currentUser();
   return (
@@ -10,4 +10,4 @@ async function StatsCardWrapper() {
   );
 }
 
-export default StatsCardWrapper;
+export default StatsCardsWrapper;

@@ -11,7 +11,6 @@
   "dependencies": {
     "@clerk/nextjs": "^4.26.1",
     "@clerk/themes": "^1.7.9",
-    "@hookform/resolvers": "^3.3.2",
     "@prisma/client": "^5.5.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -58,6 +57,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

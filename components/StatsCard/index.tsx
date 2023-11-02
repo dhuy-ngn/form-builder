@@ -21,7 +21,7 @@ function StatsCard({
 
   return (
     <Card
-      className={`${className} min-w-[400px] border-2 border-b-4 pr-4`}>
+      className={`${className} border-2 border-b-4 pr-4`}>
       <CardHeader
         className="flex flex-row items-center justify-between pb-2">
         <CardTitle

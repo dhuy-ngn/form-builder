@@ -1,4 +1,4 @@
-import { FormListStats } from '../types';
+import { FormListStats } from '../StatsCardsWrapper/types';
 type ValueKey = keyof FormListStats;
 
 export type Stats = {
