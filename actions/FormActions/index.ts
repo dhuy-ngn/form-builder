@@ -2,7 +2,7 @@
 
 import { FormListStats } from '@/components/StatsCardsWrapper/types';
 import prisma from '@/lib/prisma';
-import { FormSchema, FormSchemaType } from '@/schemas/form';
+import { FormSchema, FormSchemaType } from '@/types/Form';
 import { currentUser } from '@clerk/nextjs';
 
 class UserNotFoundError extends Error {}

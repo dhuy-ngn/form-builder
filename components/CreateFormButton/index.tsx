@@ -6,7 +6,7 @@ import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { FilePlus, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { FormSchema, FormSchemaType } from "../../schemas/form";
+import { FormSchema, FormSchemaType } from "../../types/Form";
 import { Button } from "../ui/button";
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
