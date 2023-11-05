@@ -1,5 +1,6 @@
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { FormElementInstance } from "@/types/FormElement";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,11 +56,67 @@ export default function PropertiesComponent(
                 <Input {...field} />
               </FormControl>
               <FormDescription>
-                The label of the field. <br /> It will be displated above the field.
+                Displays <b>above</b> the field. <br /> Describe what this field is for.
               </FormDescription>
               <FormMessage />
             </FormItem>
-          )}></FormField>
+          )} />
+
+        {/* Placeholder field */}
+        <FormField
+          control={form.control}
+          name="placeholder"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Placeholder</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormDescription>
+                Displays <b>inside</b> the field. <br /> You can add some hints or any examples.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
+
+        {/* Helper text */}
+        <FormField
+          control={form.control}
+          name="helperText"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Helper text</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormDescription>
+                Displays <b>below</b> the field. <br /> Give the surveyee an idea on how this field is used.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
+
+        {/* Required */}
+        <FormField
+          control={form.control}
+          name="required"
+          render={({ field }) => (
+            <FormItem
+              className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
+              <div className="space-y-0.5">
+                <FormLabel>Required field</FormLabel>
+                <FormDescription>
+                  This field cannot be left empty on submit.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
       </form>
     </Form>
   );

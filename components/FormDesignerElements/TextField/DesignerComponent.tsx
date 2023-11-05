@@ -9,9 +9,15 @@ export default function DesignerComponent(
   const { label, required, placeholder, helperText } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label>
+      <Label
+        className="flex flex-row gap-0.5">
         {label}
-        {required && "*"}
+        {required && (
+          <span
+            className="text-destructive">
+            *
+          </span>
+        )}
       </Label>
       <Input readOnly disabled placeholder={placeholder} />
       {helperText && (

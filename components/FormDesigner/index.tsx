@@ -1,12 +1,20 @@
 import useFormDesigner from "@/hooks/useFormDesigner";
+import IdGenerator from "@/lib/IdGenerator";
 import { cn } from "@/lib/utils";
 import { ElementTypes, FormElements } from "@/types/FormElement";
 import { useDndMonitor, useDroppable } from "@dnd-kit/core";
+import { findIndex } from "lodash";
 import FormDesignerElementWrapper from "../FormDesignerElementWrapper";
 import FormDesignerSidebar from "../FormDesignerSidebar";
 
 function FormDesigner() {
-  const { elements, addElement, selectedElement, setSelectedElement } = useFormDesigner();
+  const {
+    elements,
+    addElement,
+    selectedElement,
+    setSelectedElement,
+    removeElement
+  } = useFormDesigner();
   const { setNodeRef, isOver } = useDroppable({
     id: "designer-drop-area",
     data: {
@@ -20,15 +28,96 @@ function FormDesigner() {
       if (!active || !over) return;
 
       const isDesignerButtonElement = active.data?.current?.isDesignerButtonElement;
+      const isDroppingOverFormDesignerDropArea = over.data?.current?.isDesignerDropArea;
 
-      if (isDesignerButtonElement) {
+      // Dropping a Sidebar Element Button over the Designer drop zone 
+      // >> Push the item
+      const droppingSidebarButtonOverDesignerArea =
+        isDesignerButtonElement && isDroppingOverFormDesignerDropArea;
+      if (droppingSidebarButtonOverDesignerArea) {
         const type = active.data?.current?.type;
 
         const newElement = FormElements[type as ElementTypes].construct(
-          (Math.random() * 10001).toString()
+          IdGenerator()
         );
 
-        addElement(0, newElement);
+        addElement(elements.length, newElement);
+      }
+
+      // Dropping a Sidebar Element Button over the elements in the Drop zone
+      // >> Find which index to insert then insert before or after that element
+      // based on the position of the drop
+      const isDroppingOverTopHalfDesignerElement =
+        over?.data?.current?.isTopHalfDesignerElement;
+
+      const isDroppingOverBottomHalfDesignerElement =
+        over?.data?.current?.isBottomHalfDesignerElement;
+
+      const isDroppingOverDesignerElement =
+        isDroppingOverBottomHalfDesignerElement || isDroppingOverTopHalfDesignerElement;
+
+      const droppingSidebarButtonOverDesignerElement =
+        isDesignerButtonElement && isDroppingOverDesignerElement;
+
+      if (droppingSidebarButtonOverDesignerElement) {
+        const type = active.data?.current?.type;
+
+        const newElement = FormElements[type as ElementTypes].construct(
+          IdGenerator()
+        );
+
+        const overElementId = over.data?.current?.elementId;
+        const overElementIndex = findIndex(elements, { id: overElementId });
+        if (overElementIndex === -1) {
+          throw new Error("Element not found");
+        }
+
+        let newElementIndex = overElementIndex; // Insert on top-half
+        if (isDroppingOverBottomHalfDesignerElement) {
+          newElementIndex = overElementIndex + 1;
+        }
+
+        addElement(newElementIndex, newElement);
+        return;
+      }
+
+      // Dragging an already existed element over another one
+      // >> Update index based on the drop position by deleting the item with the old index and add the item with the new index
+      const isDraggingDesignerElement = active.data?.current?.isDesignerElement;
+      const draggingDesignerElementOverAnotherDesignerElement =
+        isDroppingOverDesignerElement && isDraggingDesignerElement;
+
+      if (draggingDesignerElementOverAnotherDesignerElement) {
+        const activeElementId = active.data?.current?.elementId;
+        const activeElementIndex = findIndex(elements, { id: activeElementId });
+
+        const overElementId = over.data?.current?.elementId;
+        const overElementIndex = findIndex(elements, { id: overElementId });
+        if (overElementIndex === -1 || activeElementIndex === -1) {
+          throw new Error("Element not found");
+        }
+
+        const activeElement = { ...elements[activeElementIndex] };
+        removeElement(activeElementId);
+
+        let newElementIndex = overElementIndex; // Insert on top-half
+        if (isDroppingOverBottomHalfDesignerElement) {
+          newElementIndex = overElementIndex + 1;
+        }
+        addElement(newElementIndex, activeElement);
+      }
+
+      // Dragging an already existed element over the Design drop zone
+      // >> Set the item's index to be the last
+      const draggingDesignerElementOverDesignerArea =
+        isDroppingOverFormDesignerDropArea && isDraggingDesignerElement;
+      if (draggingDesignerElementOverDesignerArea) {
+        const activeElementId = active.data?.current?.elementId;
+        const activeElementIndex = findIndex(elements, { id: activeElementId });
+        const activeElement = { ...elements[activeElementIndex] };
+
+        removeElement(activeElementId);
+        addElement(elements.length, activeElement);
       }
     },
   });
@@ -63,9 +152,9 @@ function FormDesigner() {
           {
             elements.length > 0 && (
               <div className="flex flex-col text-background w-full gap-2 p-4">
-                {elements.map(element => (
+                {elements.map((element, index) => (
                   <FormDesignerElementWrapper
-                    key={element.id}
+                    key={index}
                     element={element} />
                 ))}
               </div>

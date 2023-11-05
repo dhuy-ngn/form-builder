@@ -15,22 +15,25 @@ export default function FormDesignerContextProvider({
     = useState<FormElementInstance | null>(null);
 
   const addElement = (index: number, element: FormElementInstance) => {
-    const updatedElements = [...elements];
-    updatedElements.splice(index, 0, element);
-    setElements([...updatedElements]);
+    setElements((prev) => {
+      const newElements = [...prev];
+      newElements.splice(index, 0, element);
+      return newElements;
+    });
   };
 
   const removeElement = (id: string) => {
-    const updatedElements = filter(elements, (e) => e.id !== id);
-    setElements([...updatedElements]);
+    setElements((prev) => filter(elements, (e) => e.id !== id));
+
   };
 
   const updateElement = (id: string, element: FormElementInstance) => {
-    const updatedItemIndex = findIndex(elements, { id: id });
-    const updatedElements = [...elements];
-    updatedElements.splice(updatedItemIndex, 0, element);
-
-    setElements(updatedElements);
+    setElements((prev) => {
+      const newElements = [...prev];
+      const index = findIndex(newElements, { id: id });
+      newElements[index] = element;
+      return newElements;
+    });
   };
 
   return (
