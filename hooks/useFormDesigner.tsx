@@ -1,6 +1,6 @@
 "use client";
 
-import FormDesignerContext from "@/types/FormDesignerContext";
+import FormDesignerContext from "@/contexts/FormDesignerContext";
 import { useContext } from "react";
 
 export default function useFormDesigner() {

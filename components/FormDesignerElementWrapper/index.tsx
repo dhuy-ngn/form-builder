@@ -3,13 +3,18 @@
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { cn } from "@/lib/utils";
 import { FormElementInstance, FormElements } from "@/types/FormElement";
-import { useDroppable } from "@dnd-kit/core";
+import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-export default function FormDesignerElementWrapper({ element }: { element: FormElementInstance; }) {
-  const { removeElement } = useFormDesigner();
+export default function FormDesignerElementWrapper(
+  { element }: { element: FormElementInstance; }) {
+  const {
+    removeElement,
+    selectedElement,
+    setSelectedElement
+  } = useFormDesigner();
   const [isMouseOver, setIsMouseOver] = useState(false);
   const DesignerElement = FormElements[element.type].designerComponent;
 
@@ -29,17 +34,39 @@ export default function FormDesignerElementWrapper({ element }: { element: FormE
       isBottomHalfDesignerElement: true
     }
   });
+
+  const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
+    id: element.id + '-drag-handler',
+    data: {
+      type: element.type,
+      elementId: element.id,
+      isDesignerElement: true,
+    }
+  });
+
+  if (isDragging) return;
+
   return (
     <div
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
-      onMouseEnter={() => setIsMouseOver(true)}
-      onMouseLeave={() => setIsMouseOver(false)}>
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
+      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-muted-focus ring-inset"
+      onMouseEnter={() => {
+        setIsMouseOver(true);
+      }}
+      onMouseLeave={() => {
+        setIsMouseOver(false);
+      }}
+      onClick={(e) => {
+        setSelectedElement(element);
+      }}>
       <div
         ref={topHalf.setNodeRef}
         className="absolute w-full h-1/2" />
       <div
         ref={bottomHalf.setNodeRef}
-        className="absolute w-full h-1/2" />
+        className="absolute w-full h-1/2 bottom-0" />
       {
         isMouseOver && (
           <>
@@ -50,19 +77,36 @@ export default function FormDesignerElementWrapper({ element }: { element: FormE
                 Click for properties or drag to move
               </p>
             </div>
+
+            <div className="absolute right-0 h-full">
+              <Button
+                variant={"destructive"}
+                className="flex justify-center h-full border rounded-md rounded-l-none bg-destructive/80 opacity-80 hover:opacity-100 hover:bg-destructive"
+                onClick={(e) => {
+                  // avoid element to be selected while deleting
+                  e.stopPropagation();
+                  removeElement(element.id);
+                }}>
+                <Trash2
+                  className="h-6 w-6 text-destructive-foreground" />
+              </Button>
+            </div>
           </>
         )
       }
-      <div className="absolute right-0 h-full">
-        <Button className={cn("flex justify-center h-full border rounded-md rounded-l-none bg-destructive/80",
-          isMouseOver && "opacity-30")}
-          onClick={() => removeElement(element.id)}>
-          <Trash2
-            className="h-6 w-6 text-destructive-foreground" />
-        </Button>
-      </div>
+      {
+        topHalf.isOver && (
+          <div className="absolute top-0 w-full rounded-md h-[5px] bg-primary rounded-b-none" />
+        )
+      }
+      {
+        bottomHalf.isOver && (
+          <div className="absolute bottom-0 w-full rounded-md h-[5px] bg-primary rounded-t-none" />
+        )
+      }
       <div
-        className="flex w-full h-[120px] items-center rounded-md bg-muted/40 px-4 py-2 pointer-events-none">
+        className={cn("flex w-full h-[120px] items-center rounded-md bg-muted/40 px-4 py-2 pointer-events-none",
+          isMouseOver && "opacity-20")}>
         <DesignerElement
           elementInstance={element} />
       </div>

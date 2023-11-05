@@ -1,18 +1,17 @@
-import { InputFormElement } from '@/components/FormDesignerElements/Input';
-import { TextAreaFormElement } from '@/components/FormDesignerElements/TextArea';
+import { TextFieldFormElement } from '@/components/FormDesignerElements/TextField';
 
-export type ElementTypes = 'input' | 'textarea';
+export type ElementTypes = 'TextField';
 
 export type FormElement = {
   type: ElementTypes;
   construct: (id: string) => FormElementInstance;
-  designerButtonElement: {
+  designerSidebarButtonElement: {
     icon: React.ReactElement;
     label: string;
   };
   designerComponent: React.FC<{ elementInstance: FormElementInstance }>;
   formComponent: React.FC;
-  propertiesComponent: React.FC;
+  propertiesComponent: React.FC<{ elementInstance: FormElementInstance }>;
 };
 
 export type FormElementInstance = {
@@ -26,6 +25,5 @@ type FormElementTypes = {
 };
 
 export const FormElements: FormElementTypes = {
-  input: InputFormElement,
-  textarea: TextAreaFormElement
+  TextField: TextFieldFormElement
 };

@@ -10,7 +10,7 @@ type FormDesignerSidebarButtonProps = {
 function FormDesignerSidebarButton({
   formElement
 }: FormDesignerSidebarButtonProps) {
-  const { label, icon } = formElement.designerButtonElement;
+  const { label, icon } = formElement.designerSidebarButtonElement;
   const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
     id: `designer-btn-${formElement.type}`,
     data: {
@@ -24,7 +24,7 @@ function FormDesignerSidebarButton({
       {...listeners}
       {...attributes}
       variant={"outline"}
-      className={cn("flex flex-col gap-2 h-[120px] cursor-grab",
+      className={cn("flex flex-col gap-2 h-[120px] cursor-grab w-full",
         isDragging && 'ring-2 ring-primary')}>
       {icon}
       <p className="text-xs">{label}</p>

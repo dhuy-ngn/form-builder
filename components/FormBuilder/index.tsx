@@ -1,6 +1,6 @@
 "use client";
 
-import { DndContext, useDroppable } from "@dnd-kit/core";
+import { DndContext, MouseSensor, TouchSensor, useDroppable, useSensor, useSensors } from "@dnd-kit/core";
 import { Form } from "@prisma/client";
 import FormDesigner from "../FormDesigner";
 import FormDesignerSidebarButtonDragOverlayWrapper from "../FormDesignerSidebarButtonDragOverlayWrapper";
@@ -24,8 +24,21 @@ function FormBuilder({
       isDesignerDropArea: true,
     }
   });
+
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 10,
+    }
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 300,
+      tolerance: 5
+    }
+  });
+  const sensors = useSensors(mouseSensor, touchSensor);
   return (
-    <DndContext>
+    <DndContext sensors={sensors}>
       <main className="flex flex-col w-full p-4">
         <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
           <h2 className="truncate font-medium">

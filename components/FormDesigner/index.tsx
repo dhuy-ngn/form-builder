@@ -6,7 +6,7 @@ import FormDesignerElementWrapper from "../FormDesignerElementWrapper";
 import FormDesignerSidebar from "../FormDesignerSidebar";
 
 function FormDesigner() {
-  const { elements, addElement } = useFormDesigner();
+  const { elements, addElement, selectedElement, setSelectedElement } = useFormDesigner();
   const { setNodeRef, isOver } = useDroppable({
     id: "designer-drop-area",
     data: {
@@ -36,7 +36,11 @@ function FormDesigner() {
   return (
     <div
       className="flex w-full h-full">
-      <div className="p-4 w-full h-full">
+      <div className="p-4 w-full"
+        onClick={() => {
+          if (selectedElement)
+            setSelectedElement(null);
+        }}>
         <div
           ref={setNodeRef}
           className={cn("bg-muted-focus/50 max-w-[800px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
@@ -44,7 +48,7 @@ function FormDesigner() {
           )}>
 
           {
-            isOver && (
+            isOver && elements.length === 0 && (
               <div className="p-4 w-full">
                 <div className="h-[120px] rounded-md bg-muted"></div>
               </div>
