@@ -11,11 +11,12 @@ function FormDesignerSidebarElementProperties() {
   return (
     <div
       className="flex flex-col p-2">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center h-[40px] space-y-0.5">
         <p className="text-md text-foreground/70">Element properties</p>
         <Button
           size={"icon"}
           variant={"ghost"}
+          className="hover:bg-transparent hover:opacity-100 opacity-70"
           onClick={() => {
             setSelectedElement(null);
           }}>

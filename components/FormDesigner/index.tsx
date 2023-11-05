@@ -132,7 +132,7 @@ function FormDesigner() {
         }}>
         <div
           ref={setNodeRef}
-          className={cn("bg-muted-focus/50 max-w-[800px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
+          className={cn("dark:bg-muted-focus/20 bg-muted-focus/60 max-w-[800px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
             isOver && "ring-2 ring-primary/20"
           )}>
 

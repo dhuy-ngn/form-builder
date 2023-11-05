@@ -2,6 +2,7 @@ import { ElementTypes, FormElement, FormElementInstance } from "@/types/FormElem
 import { FormInput } from "lucide-react";
 import { z } from "zod";
 import DesignerComponent from "./DesignerComponent";
+import FormComponent from "./FormComponent";
 import PropertiesComponent from "./PropertiesComponent";
 
 const type: ElementTypes = "TextField";
@@ -38,6 +39,6 @@ export const TextFieldFormElement: FormElement = {
     label: "Input"
   },
   designerComponent: DesignerComponent,
-  formComponent: () => <div>Form component</div>,
+  formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 };

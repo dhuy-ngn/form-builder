@@ -16,6 +16,7 @@ export default function FormDesignerElementWrapper(
     setSelectedElement
   } = useFormDesigner();
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const isSelected = selectedElement?.id === element.id;
   const DesignerElement = FormElements[element.type].designerComponent;
 
   const topHalf = useDroppable({
@@ -35,14 +36,15 @@ export default function FormDesignerElementWrapper(
     }
   });
 
-  const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
-    id: element.id + '-drag-handler',
-    data: {
-      type: element.type,
-      elementId: element.id,
-      isDesignerElement: true,
-    }
-  });
+  const { setNodeRef, listeners, attributes, isDragging } =
+    useDraggable({
+      id: element.id + '-drag-handler',
+      data: {
+        type: element.type,
+        elementId: element.id,
+        isDesignerElement: true,
+      }
+    });
 
   if (isDragging) return;
 
@@ -51,7 +53,8 @@ export default function FormDesignerElementWrapper(
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-muted-focus ring-inset"
+      className={cn("relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-muted-focus ring-inset bg-muted",
+        isSelected && "ring-primary ring-2")}
       onMouseEnter={() => {
         setIsMouseOver(true);
       }}
@@ -59,6 +62,7 @@ export default function FormDesignerElementWrapper(
         setIsMouseOver(false);
       }}
       onClick={(e) => {
+        e.stopPropagation();
         setSelectedElement(element);
       }}>
       <div
