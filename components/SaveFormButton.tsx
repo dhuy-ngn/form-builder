@@ -2,8 +2,8 @@ import { UpdateForm } from "@/actions/FormActions";
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { Loader2, Save } from "lucide-react";
 import { useTransition } from "react";
-import { Button } from "../../../../../components/ui/button";
-import { toast } from "../../../../../components/ui/use-toast";
+import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
 
 function SaveFormButton({ id }: { id: number; }) {
   const { elements } = useFormDesigner();

@@ -2,9 +2,9 @@ import { Form } from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import { ArrowRight, Eye, FileEdit, Send } from 'lucide-react';
 import Link from 'next/link';
-import { Badge } from '../../../../../components/ui/badge';
-import { Button } from '../../../../../components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../../../components/ui/card';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 
 type FormCardProps = {
   data: Form;

@@ -1,8 +1,8 @@
-import FormStatsCards from "@/app/(dashboard)/_components/FormStatsCards";
-import CreateFormButton from "@/app/forms/[formId]/build/_components/CreateFormButton";
-import FormCards from "@/app/forms/[formId]/build/_components/FormCards";
-import FormStatsCardWrapper from "@/components/FormFormStatsCardsWrapper/FormFormFormStatsCardsWrapper";
+import CreateFormButton from "@/components/CreateFormButton";
+import FormStatsCardWrapper from "@/components/FormStatsCardsWrapper";
 import { Suspense } from "react";
+import FormCards from "../../components/FormCards";
+import FormStatsCards from "../../components/FormStatsCards";
 
 export default function Home() {
 

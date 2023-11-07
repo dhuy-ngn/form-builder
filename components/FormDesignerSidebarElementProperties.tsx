@@ -1,8 +1,8 @@
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { FormElements } from "@/types/FormElement";
 import { X } from "lucide-react";
-import { Button } from "../../../../../components/ui/button";
-import { Separator } from "../../../../../components/ui/separator";
+import { Button } from "./ui/button";
+import { Separator } from "./ui/separator";
 
 function FormDesignerSidebarElementProperties() {
   const { selectedElement, setSelectedElement } = useFormDesigner();

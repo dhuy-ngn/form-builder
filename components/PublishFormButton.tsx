@@ -2,9 +2,9 @@ import { PublishForm } from "@/actions/FormActions";
 import { Loader2, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../../../../../components/ui/alert-dialog";
-import { Button } from "../../../../../components/ui/button";
-import { toast } from "../../../../../components/ui/use-toast";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
 
 function PublishFormButton({ id }: { id: number; }) {
   const [loading, startTransition] = useTransition();

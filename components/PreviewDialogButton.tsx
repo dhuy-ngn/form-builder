@@ -3,8 +3,8 @@
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { FormElements } from "@/types/FormElement";
 import { Fullscreen } from "lucide-react";
-import { Button } from "../../../../../components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "../../../../../components/ui/dialog";
+import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 function PreviewDialogButton() {
   const { elements } = useFormDesigner();

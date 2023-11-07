@@ -1,4 +1,4 @@
-import { FormListStats } from '../../../../types/FormListStats';
+import { FormListStats } from '../../types/FormListStats';
 type ValueKey = keyof FormListStats;
 
 export type Stats = {

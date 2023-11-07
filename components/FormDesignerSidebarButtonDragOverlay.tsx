@@ -1,5 +1,5 @@
 import { FormElement } from "@/types/FormElement";
-import { Button } from "../../../../../components/ui/button";
+import { Button } from "./ui/button";
 
 function FormDesignerSidebarButtonDragOverlay(
   { formElement }: { formElement: FormElement; }

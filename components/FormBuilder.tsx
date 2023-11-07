@@ -7,14 +7,14 @@ import { ArrowLeft, ArrowRight, Copy, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Confetti from 'react-confetti';
-import { Button } from "../../../../../components/ui/button";
-import { Input } from "../../../../../components/ui/input";
-import { Separator } from "../../../../../components/ui/separator";
 import FormDesigner from "./FormDesigner";
 import FormDesignerSidebarButtonDragOverlayWrapper from "./FormDesignerSidebarButtonDragOverlayWrapper";
 import PreviewDialogButton from "./PreviewDialogButton";
 import PublishFormButton from "./PublishFormButton";
 import SaveFormButton from "./SaveFormButton";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Separator } from "./ui/separator";
 
 type FormBuilderProps = {
   form: Form;

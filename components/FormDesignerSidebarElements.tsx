@@ -1,6 +1,6 @@
 import { FormElements } from "@/types/FormElement";
-import { Separator } from "../../../../../components/ui/separator";
 import FormDesignerSidebarButton from "./FormDesignerSideButton";
+import { Separator } from "./ui/separator";
 
 function FormDesignerSidebarElements() {
   return (
