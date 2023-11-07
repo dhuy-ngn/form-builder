@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { FormElement } from "@/types/FormElement";
 import { useDraggable } from "@dnd-kit/core";
-import { Button } from "../ui/button";
+import { Button } from "../../../../../components/ui/button";
 
 type FormDesignerSidebarButtonProps = {
   formElement: FormElement;

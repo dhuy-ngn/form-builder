@@ -1,6 +1,6 @@
 import useFormDesigner from "@/hooks/useFormDesigner";
-import FormDesignerSidebarElementProperties from "../FormDesignerSidebarElementProperties";
-import FormDesignerSidebarElements from "../FormDesignerSidebarElements";
+import FormDesignerSidebarElementProperties from "./FormDesignerSidebarElementProperties";
+import FormDesignerSidebarElements from "./FormDesignerSidebarElements";
 
 function FormDesignerSidebar() {
   const { selectedElement } = useFormDesigner();

@@ -6,7 +6,7 @@ import { FormElementInstance, FormElements } from "@/types/FormElement";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../../../../components/ui/button";
 
 export default function FormDesignerElementWrapper(
   { element }: { element: FormElementInstance; }) {

@@ -4,7 +4,7 @@ import useFormDesigner from "@/hooks/useFormDesigner";
 import { ElementTypes, FormElements } from "@/types/FormElement";
 import { Active, DragOverlay, useDndMonitor } from "@dnd-kit/core";
 import { useState } from "react";
-import FormDesignerSidebarButtonDragOverlay from "../FormDesignerSidebarButtonDragOverlay";
+import FormDesignerSidebarButtonDragOverlay from "./FormDesignerSidebarButtonDragOverlay";
 
 import { find } from 'lodash';
 

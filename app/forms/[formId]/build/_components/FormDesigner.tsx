@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { ElementTypes, FormElements } from "@/types/FormElement";
 import { useDndMonitor, useDroppable } from "@dnd-kit/core";
 import { findIndex } from "lodash";
-import FormDesignerElementWrapper from "../FormDesignerElementWrapper";
-import FormDesignerSidebar from "../FormDesignerSidebar";
+import FormDesignerElementWrapper from "./FormDesignerElementWrapper";
+import FormDesignerSidebar from "./FormDesignerSidebar";
 
 function FormDesigner() {
   const {

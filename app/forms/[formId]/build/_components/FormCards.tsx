@@ -1,5 +1,5 @@
 import { GetForms } from "@/actions/FormActions";
-import FormCard from "../FormCard";
+import FormCard from "./FormCard";
 
 async function FormCards() {
   const forms = await GetForms();

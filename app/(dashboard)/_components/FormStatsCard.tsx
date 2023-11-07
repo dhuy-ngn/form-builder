@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-type StatsCardProps = {
+type FormStatsCardProps = {
   title: string,
   description: string,
   valueKey: string,
@@ -10,14 +10,14 @@ type StatsCardProps = {
   className?: string,
 };
 
-function StatsCard({
+function FormStatsCard({
   title,
   description,
   valueKey,
   value,
   loading,
   className,
-}: StatsCardProps) {
+}: FormStatsCardProps) {
 
   return (
     <Card
@@ -52,4 +52,4 @@ function StatsCard({
   );
 }
 
-export default StatsCard;
+export default FormStatsCard;

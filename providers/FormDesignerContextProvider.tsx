@@ -45,6 +45,7 @@ export default function FormDesignerContextProvider({
         updateElement,
         selectedElement,
         setSelectedElement,
+        setElements,
       }}>
       {children}
     </FormDesignerContext.Provider>

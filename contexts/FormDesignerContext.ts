@@ -9,6 +9,8 @@ type FormDesignerContextType = {
 
   selectedElement: FormElementInstance | null;
   setSelectedElement: Dispatch<SetStateAction<FormElementInstance | null>>;
+
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
 };
 
 const FormDesignerContext = createContext<FormDesignerContextType | null>(null);

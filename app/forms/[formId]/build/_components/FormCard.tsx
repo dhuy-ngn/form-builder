@@ -1,10 +1,10 @@
 import { Form } from '@prisma/client';
 import { formatDistance } from 'date-fns';
-import { ArrowRight, FileEdit, Send, View } from 'lucide-react';
+import { ArrowRight, Eye, FileEdit, Send } from 'lucide-react';
 import Link from 'next/link';
-import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../../../../../components/ui/badge';
+import { Button } from '../../../../../components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../../../components/ui/card';
 
 type FormCardProps = {
   data: Form;
@@ -14,10 +14,11 @@ function FormCard({ data }: FormCardProps) {
   const { name, published, createdAt, visits, submissions, description, id } = data;
 
   return (
-    <Card>
+    <Card
+      className='h-[200px]'>
       <CardHeader>
         <CardTitle
-          className='flex items-center gap-2 justify-between'>
+          className='flex items-center gap-2'>
           <span
             className='truncate font-bold'>
             {name}
@@ -26,7 +27,8 @@ function FormCard({ data }: FormCardProps) {
             ? <Badge>Published</Badge>
             : <Badge variant={"destructive"}>Draft</Badge>}
         </CardTitle>
-        <CardDescription>
+        <CardDescription
+          className='flex flex-row justify-between'>
           {
             formatDistance(createdAt, new Date(), {
               addSuffix: true,
@@ -34,10 +36,10 @@ function FormCard({ data }: FormCardProps) {
           }
           {
             published && (
-              <span className="fles items-center-gap-2">
-                <View className='text-muted-foreground' />
+              <span className="flex items-center gap-2 flex-row">
+                <Eye className='text-muted-foreground h-4 w-4' />
                 <span className='text-muted-foreground'>{visits}</span>
-                <Send className='text-muted-foreground' />
+                <Send className='text-muted-foreground h-4 w-4' />
                 <span className='text-muted-foreground'>{submissions}</span>
               </span>
             )}

@@ -6,13 +6,13 @@ import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { FilePlus, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { FormSchema, FormSchemaType } from "../../types/Form";
-import { Button } from "../ui/button";
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { toast } from "../ui/use-toast";
+import { Button } from "../../../../../components/ui/button";
+import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../../../../components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "../../../../../components/ui/form";
+import { Input } from "../../../../../components/ui/input";
+import { Textarea } from "../../../../../components/ui/textarea";
+import { toast } from "../../../../../components/ui/use-toast";
+import { FormSchema, FormSchemaType } from "../../../../../types/Form";
 
 function CreateFormButton() {
   const form = useForm<FormSchemaType>({
@@ -42,7 +42,7 @@ function CreateFormButton() {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="group border border-primary/20 h-[190px] items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4 bg-background">
+          className="group border border-primary/20 items-center justify-center flex flex-col hover:border-primary h-[200px] hover:cursor-pointer border-dashed gap-4 bg-background">
           <FilePlus
             className="h-8 w-8 text-muted-foreground/60 group-hover:text-primary-foreground" />
           <p
