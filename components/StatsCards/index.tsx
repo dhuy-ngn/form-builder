@@ -1,16 +1,16 @@
 import { GetFormStats } from "@/actions/FormActions";
-import FormStatsCard from "../FormStatsCard";
+import FormStatsCard from "../StatsCard";
 import { components } from "./components";
 
-type FormStatsCardsProps = {
+type StatsCardsProps = {
   data?: Awaited<ReturnType<typeof GetFormStats>>;
   loading: boolean;
 };
 
-function FormStatsCards({
+function StatsCards({
   data,
   loading,
-}: FormStatsCardsProps) {
+}: StatsCardsProps) {
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8 mt-4">
@@ -26,4 +26,4 @@ function FormStatsCards({
   );
 }
 
-export default FormStatsCards;
+export default StatsCards;

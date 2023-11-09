@@ -6,6 +6,7 @@ import FormComponent from "./FormComponent";
 import PropertiesComponent from "./PropertiesComponent";
 
 const type: ElementTypes = "TextField";
+export type SubmitFunction = (key: string, value: string) => void;
 
 export const extraAtrributes = {
   label: "Input",
@@ -41,4 +42,16 @@ export const TextFieldFormElement: FormElement = {
   designerComponent: DesignerComponent,
   formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
+
+  validate: (
+    formElement: FormElementInstance,
+    currentValue: string
+  ) => {
+    const element = formElement as CustomInstance;
+    if (element.extraAttributes.required) {
+      return currentValue.length > 0;
+    }
+
+    return true;
+  }
 };

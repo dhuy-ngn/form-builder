@@ -1,13 +1,13 @@
 import { GetFormStats } from "@/actions/FormActions";
 import { currentUser } from "@clerk/nextjs";
-import FormStatsCards from "./FormStatsCards";
+import StatsCards from "./StatsCards";
 
-async function FormFormStatsCardsWrapper() {
+async function StatsCardsWrapper() {
   const data = await GetFormStats();
   const user = currentUser();
   return (
-    <FormStatsCards loading={false} data={data} />
+    <StatsCards loading={false} data={data} />
   );
 }
 
-export default FormFormStatsCardsWrapper;
+export default StatsCardsWrapper;

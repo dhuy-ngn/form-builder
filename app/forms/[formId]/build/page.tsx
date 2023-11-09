@@ -1,5 +1,5 @@
 import { GetFormById } from "@/actions/FormActions";
-import FormBuilder from "@/app/forms/[formId]/build/_components/FormBuilder";
+import FormBuilder from "@/components/FormBuilder";
 
 type FormBuilderProps = {
   params: {

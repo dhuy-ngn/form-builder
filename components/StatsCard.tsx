@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-type FormStatsCardProps = {
+type StatsCardProps = {
   title: string,
   description: string,
   valueKey: string,
@@ -10,14 +10,14 @@ type FormStatsCardProps = {
   className?: string,
 };
 
-function FormStatsCard({
+function StatsCard({
   title,
   description,
   valueKey,
   value,
   loading,
   className,
-}: FormStatsCardProps) {
+}: StatsCardProps) {
 
   return (
     <Card
@@ -42,7 +42,7 @@ function FormStatsCard({
         }
         {
           !loading && value &&
-            valueKey.includes('Rate') ? `${value * 100}%` : value
+            valueKey.includes('Rate') ? `${(value * 100).toFixed(2)}%` : value
         }
         <p className="text-xs text-muted-foreground pt-1 font-normal">
           {description}
@@ -52,4 +52,4 @@ function FormStatsCard({
   );
 }
 
-export default FormStatsCard;
+export default StatsCard;
