@@ -1,6 +1,7 @@
 import { GetFormById } from "@/actions/FormActions";
 import StatsCards from "@/components/StatsCards";
 import StatsCardsWrapper from "@/components/StatsCardsWrapper";
+import SubmissionTable from "@/components/SubmissionTable";
 import VisitFormButton from "@/components/VisitFormButton";
 import { Suspense } from "react";
 
@@ -41,6 +42,7 @@ async function FormDetailPage({
           <StatsCards loading={true} />
         }>
           <StatsCardsWrapper />
+          <SubmissionTable id={Number(formId)} />
         </Suspense>
       </div>
     </>
