@@ -1,9 +1,18 @@
+import { HeaderFieldFormElement } from '@/components/FormElements/HeaderField';
+import { SeparatorFieldFormElement } from '@/components/FormElements/SeparatorField';
+import { SubheaderFieldFormElement } from '@/components/FormElements/SubheaderField';
 import {
   SubmitFunction,
   TextFieldFormElement
 } from '@/components/FormElements/TextField';
+import { TextareaFieldFormElement } from '@/components/FormElements/TextareaField';
 
-export type ElementTypes = 'TextField';
+export type ElementTypes =
+  | 'TextField'
+  | 'HeaderField'
+  | 'SubheaderField'
+  | 'TextareaField'
+  | 'SeparatorField';
 
 export type FormElement = {
   type: ElementTypes;
@@ -34,5 +43,9 @@ type FormElementTypes = {
 };
 
 export const FormElements: FormElementTypes = {
-  TextField: TextFieldFormElement
+  TextField: TextFieldFormElement,
+  HeaderField: HeaderFieldFormElement,
+  SubheaderField: SubheaderFieldFormElement,
+  TextareaField: TextareaFieldFormElement,
+  SeparatorField: SeparatorFieldFormElement
 };

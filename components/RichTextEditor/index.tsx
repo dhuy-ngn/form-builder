@@ -9,10 +9,12 @@ import './styles.css';
 type RichTextEditorProps = {
   placeholder?: string,
   onChange: (text: string) => void;
+  onBlur: (text: string) => void;
+  readOnly?: boolean,
 };
 
 function RichTextEditor({
-  placeholder, onChange
+  placeholder, onChange, readOnly
 }: RichTextEditorProps) {
   // Lazy loading react-quill
   const ReactQuill = useMemo(
@@ -52,7 +54,8 @@ function RichTextEditor({
         theme="snow"
         placeholder={placeholder}
         modules={modules}
-        onChange={handleOnChange} />
+        onChange={handleOnChange}
+        readOnly={readOnly} />
       <text
         className="text-xs text-neutral-focus ml-auto pr-2"
       >Character count: {count}
