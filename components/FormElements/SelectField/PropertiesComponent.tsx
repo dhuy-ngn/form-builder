@@ -1,26 +1,30 @@
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import { toast } from "@/components/ui/use-toast";
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { FormElementInstance } from "@/types/FormElement";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Minus, Plus } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { CustomInstance, propertiesFormSchemaType, propertiesSchema } from ".";
 
 export default function PropertiesComponent(
   { elementInstance }: { elementInstance: FormElementInstance; }) {
-  const { updateElement } = useFormDesigner();
+  const { updateElement, setSelectedElement } = useFormDesigner();
   const element = elementInstance as CustomInstance;
   const form = useForm<propertiesFormSchemaType>({
     resolver: zodResolver(propertiesSchema),
-    mode: "onBlur",
+    mode: "onSubmit",
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
       placeholder: element.extraAttributes.placeholder,
-      rows: element.extraAttributes.rows,
+      options: element.extraAttributes.options,
     }
   });
 
@@ -29,7 +33,7 @@ export default function PropertiesComponent(
   }, [element, form]);
 
   const applyChanges = (values: propertiesFormSchemaType) => {
-    const { label, helperText, placeholder, required, rows } = values;
+    const { label, helperText, placeholder, required, options } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
@@ -37,14 +41,23 @@ export default function PropertiesComponent(
         helperText: helperText,
         placeholder: placeholder,
         required: required,
-        rows: rows,
+        options: options
       }
     });
+
+    toast({
+      title: "Success",
+      description: "Property saved successfully"
+    });
+
+    setSelectedElement(null);
   };
 
   return (
     <Form {...form}>
-      <form onBlur={form.handleSubmit(applyChanges)}
+      <form onSubmit={
+        form.handleSubmit(applyChanges)
+      }
         className="space-y-3">
 
         {/* Label field */}
@@ -98,24 +111,55 @@ export default function PropertiesComponent(
             </FormItem>
           )} />
 
-        {/* Rows field */}
+        {/* Options */}
         <FormField
           control={form.control}
-          name="rows"
+          name="options"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Rows</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="number"
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                  min={1}
-                  max={5}
-                />
-              </FormControl>
+              <div className="flex justify-between items-center">
+                <FormLabel>Options</FormLabel>
+                <Button
+                  variant={"outline"}
+                  className="gap-2"
+                  onClick={(e) => {
+                    e.preventDefault(); // avoid submit
+                    form.setValue(
+                      "options",
+                      field.value.concat(`Option ${field.value.length + 1}`));
+                  }}>
+                  <Plus className="h-4 w-4" />
+                  Add
+                </Button>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                {form.watch("options").map((option, index) => (
+                  <div key={index}
+                    className="flex items-center justify-between gap-1">
+                    <Input
+                      value={option}
+                      onChange={e => {
+                        field.value[index] = e.target.value;
+                        field.onChange(field.value);
+                      }} />
+                    <Button
+                      variant={"destructive"}
+                      disabled={field.value.length === 1}
+                      onClick={e => {
+                        e.preventDefault();
+                        const newOptions = [...field.value];
+                        newOptions.splice(index, 1);
+                        field.onChange(newOptions);
+                      }}>
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
               <FormDescription>
-                Controls how many rows of text that the surveyees can see at once.
+                List of options to choose from. <br />
+                Must have at least one item.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -142,7 +186,15 @@ export default function PropertiesComponent(
               <FormMessage />
             </FormItem>
           )} />
+
+        <Separator />
+        <Button
+          className="w-full"
+          variant={"default"}
+          type="submit">
+          Save
+        </Button>
       </form>
-    </Form>
+    </Form >
   );
 }

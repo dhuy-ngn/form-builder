@@ -1,18 +1,19 @@
 import { ElementTypes, FormElement, FormElementInstance } from "@/types/FormElement";
-import { Binary } from "lucide-react";
+import { ChevronDownSquare } from "lucide-react";
 import { z } from "zod";
 import DesignerComponent from "./DesignerComponent";
 import FormComponent from "./FormComponent";
 import PropertiesComponent from "./PropertiesComponent";
 
-const type: ElementTypes = "NumberField";
+const type: ElementTypes = "SelectField";
 export type SubmitFunction = (key: string, value: string) => void;
 
 export const extraAtrributes = {
-  label: "Input",
+  label: "Select",
   helperText: "Helper text",
   required: false,
-  placeholder: "Enter value here..."
+  placeholder: "Choose a value",
+  options: ["Option 1"]
 };
 
 export type CustomInstance = FormElementInstance & {
@@ -23,12 +24,13 @@ export const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
   helperText: z.string().max(200),
   required: z.boolean().default(false),
-  placeholder: z.string().max(50)
+  placeholder: z.string().max(50),
+  options: z.array(z.string()).default([])
 });
 
 export type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
-export const NumberFieldFormElement: FormElement = {
+export const SelectFieldFormElement: FormElement = {
   type,
   construct: (id: string) => ({
     id,
@@ -36,8 +38,8 @@ export const NumberFieldFormElement: FormElement = {
     extraAttributes: extraAtrributes
   }),
   designerSidebarButtonElement: {
-    icon: <Binary />,
-    label: "Number"
+    icon: <ChevronDownSquare />,
+    label: "Select"
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,
@@ -52,6 +54,6 @@ export const NumberFieldFormElement: FormElement = {
       return currentValue.length > 0;
     }
 
-    return true;
+    return element.extraAttributes.options.length > 0;
   }
 };

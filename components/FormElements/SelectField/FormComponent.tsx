@@ -1,9 +1,9 @@
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { FormElementInstance } from "@/types/FormElement";
 import { useEffect, useState } from "react";
-import { CustomInstance, SubmitFunction, TextareaFieldFormElement, } from ".";
+import { CustomInstance, SelectFieldFormElement, SubmitFunction } from ".";
 
 export default function FormComponent({
   elementInstance,
@@ -17,7 +17,7 @@ export default function FormComponent({
   defaultValue?: string;
 }) {
   const element = elementInstance as CustomInstance;
-  const { label, required, placeholder, helperText, rows } = element.extraAttributes;
+  const { label, required, placeholder, helperText, options } = element.extraAttributes;
 
   const [value, setValue] = useState(defaultValue || "");
   const [error, setError] = useState(false);
@@ -39,22 +39,30 @@ export default function FormComponent({
           </span>
         )}
       </Label>
-      <Textarea
-        rows={rows}
-        placeholder={placeholder}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={(e) => {
+      <Select
+        onValueChange={(value) => {
+          setValue(value);
           if (!submitValue) return;
 
           const isValid =
-            TextareaFieldFormElement.validate(element, e.target.value);
+            SelectFieldFormElement.validate(element, value);
           setError(!isValid);
 
           if (!isValid) return;
 
-          submitValue(element.id, e.target.value);
-        }}
-        value={value} />
+          submitValue(element.id, value);
+        }}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map(option => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
       {helperText && (
         <p className={cn("text-muted-foreground text-[0.75rem]",
           error && "text-destructive")}>

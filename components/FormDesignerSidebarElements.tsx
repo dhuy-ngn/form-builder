@@ -22,6 +22,9 @@ function FormDesignerSidebarElements() {
         <FormDesignerSidebarButton formElement={FormElements.TextField} />
         <FormDesignerSidebarButton formElement={FormElements.TextareaField} />
         <FormDesignerSidebarButton formElement={FormElements.NumberField} />
+        <FormDesignerSidebarButton formElement={FormElements.DateField} />
+        <FormDesignerSidebarButton formElement={FormElements.SelectField} />
+        <FormDesignerSidebarButton formElement={FormElements.CheckboxField} />
       </div>
     </div>
   );

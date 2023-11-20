@@ -13,7 +13,7 @@ export default function FormComponent({
   defaultValue?: string;
 }) {
   const element = elementInstance as CustomInstance;
-  const { label } = element.extraAttributes;
+  const { title } = element.extraAttributes;
 
   const [error, setError] = useState(false);
 
@@ -24,9 +24,9 @@ export default function FormComponent({
   return (
     <div className="flex flex-col gap-2 w-full p-6">
       <Label
-        className={cn("flex flex-row gap-0.5 ",
+        className={cn("flex flex-row gap-0.5 text-md text-bold text-muted",
           error && "text-destructive")}>
-        {label}
+        {title}
       </Label>
     </div>
   );

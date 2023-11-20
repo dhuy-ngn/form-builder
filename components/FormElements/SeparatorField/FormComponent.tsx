@@ -19,8 +19,8 @@ export default function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-2 w-full p-6">
-      <Separator className="w-full h-full my-4" />
+    <div className="flex flex-col gap-2 w-full items-center px-8">
+      <Separator className="bg-primary-foreground w-[90%]" />
     </div>
   );
 }

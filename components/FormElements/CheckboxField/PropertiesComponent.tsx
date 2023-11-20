@@ -1,6 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import { toast } from "@/components/ui/use-toast";
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { FormElementInstance } from "@/types/FormElement";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,17 +13,15 @@ import { CustomInstance, propertiesFormSchemaType, propertiesSchema } from ".";
 
 export default function PropertiesComponent(
   { elementInstance }: { elementInstance: FormElementInstance; }) {
-  const { updateElement } = useFormDesigner();
+  const { updateElement, setSelectedElement } = useFormDesigner();
   const element = elementInstance as CustomInstance;
   const form = useForm<propertiesFormSchemaType>({
     resolver: zodResolver(propertiesSchema),
-    mode: "onBlur",
+    mode: "onSubmit",
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
-      placeholder: element.extraAttributes.placeholder,
-      rows: element.extraAttributes.rows,
     }
   });
 
@@ -29,22 +30,29 @@ export default function PropertiesComponent(
   }, [element, form]);
 
   const applyChanges = (values: propertiesFormSchemaType) => {
-    const { label, helperText, placeholder, required, rows } = values;
+    const { label, helperText, required } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
         label: label,
         helperText: helperText,
-        placeholder: placeholder,
         required: required,
-        rows: rows,
       }
     });
+
+    toast({
+      title: "Success",
+      description: "Property saved successfully"
+    });
+
+    setSelectedElement(null);
   };
 
   return (
     <Form {...form}>
-      <form onBlur={form.handleSubmit(applyChanges)}
+      <form onSubmit={
+        form.handleSubmit(applyChanges)
+      }
         className="space-y-3">
 
         {/* Label field */}
@@ -59,23 +67,6 @@ export default function PropertiesComponent(
               </FormControl>
               <FormDescription>
                 Displays <b>above</b> the field. <br /> Describe what this field is for.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )} />
-
-        {/* Placeholder field */}
-        <FormField
-          control={form.control}
-          name="placeholder"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Placeholder</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormDescription>
-                Displays <b>inside</b> the field. <br /> You can add some hints or any examples.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -98,28 +89,6 @@ export default function PropertiesComponent(
             </FormItem>
           )} />
 
-        {/* Rows field */}
-        <FormField
-          control={form.control}
-          name="rows"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Rows</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="number"
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                  min={1}
-                  max={5}
-                />
-              </FormControl>
-              <FormDescription>
-                Controls how many rows of text that the surveyees can see at once.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )} />
 
         {/* Required */}
         <FormField
@@ -142,7 +111,15 @@ export default function PropertiesComponent(
               <FormMessage />
             </FormItem>
           )} />
+
+        <Separator />
+        <Button
+          className="w-full"
+          variant={"default"}
+          type="submit">
+          Save
+        </Button>
       </form>
-    </Form>
+    </Form >
   );
 }

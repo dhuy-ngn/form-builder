@@ -19,8 +19,6 @@ export default function PropertiesComponent(
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
-      placeholder: element.extraAttributes.placeholder,
-      rows: element.extraAttributes.rows,
     }
   });
 
@@ -29,7 +27,7 @@ export default function PropertiesComponent(
   }, [element, form]);
 
   const applyChanges = (values: propertiesFormSchemaType) => {
-    const { label, helperText, placeholder, required, rows } = values;
+    const { label, helperText, placeholder, required } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
@@ -37,7 +35,6 @@ export default function PropertiesComponent(
         helperText: helperText,
         placeholder: placeholder,
         required: required,
-        rows: rows,
       }
     });
   };
@@ -64,23 +61,6 @@ export default function PropertiesComponent(
             </FormItem>
           )} />
 
-        {/* Placeholder field */}
-        <FormField
-          control={form.control}
-          name="placeholder"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Placeholder</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormDescription>
-                Displays <b>inside</b> the field. <br /> You can add some hints or any examples.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )} />
-
         {/* Helper text */}
         <FormField
           control={form.control}
@@ -93,29 +73,6 @@ export default function PropertiesComponent(
               </FormControl>
               <FormDescription>
                 Displays <b>below</b> the field. <br /> Give the surveyee an idea on how this field is used.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )} />
-
-        {/* Rows field */}
-        <FormField
-          control={form.control}
-          name="rows"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Rows</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="number"
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                  min={1}
-                  max={5}
-                />
-              </FormControl>
-              <FormDescription>
-                Controls how many rows of text that the surveyees can see at once.
               </FormDescription>
               <FormMessage />
             </FormItem>

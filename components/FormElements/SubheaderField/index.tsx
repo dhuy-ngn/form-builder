@@ -22,7 +22,7 @@ export const propertiesSchema = z.object({
 export type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
 export const SubheaderFieldFormElement: FormElement = {
-  type: 'SubheaderField',
+  type,
   construct: (id: string) => ({
     id,
     type,

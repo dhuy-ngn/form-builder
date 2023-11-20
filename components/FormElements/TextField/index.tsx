@@ -29,7 +29,7 @@ export const propertiesSchema = z.object({
 export type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
 export const TextFieldFormElement: FormElement = {
-  type: 'TextField',
+  type,
   construct: (id: string) => ({
     id,
     type,

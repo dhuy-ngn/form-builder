@@ -25,13 +25,13 @@ export const propertiesSchema = z.object({
   helperText: z.string().max(200),
   required: z.boolean().default(false),
   placeholder: z.string().max(50),
-  rows: z.number().min(1).max(5)
+  rows: z.number().min(3).max(10)
 });
 
 export type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
 export const TextareaFieldFormElement: FormElement = {
-  type: 'TextareaField',
+  type,
   construct: (id: string) => ({
     id,
     type,

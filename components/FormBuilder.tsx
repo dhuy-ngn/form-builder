@@ -23,7 +23,7 @@ type FormBuilderProps = {
 function FormBuilder({
   form
 }: FormBuilderProps) {
-  const { setElements } = useFormDesigner();
+  const { setElements, setSelectedElement } = useFormDesigner();
   const [isReady, setIsReady] = useState(false);
   const [isCopyLinkButtonClicked, setIsCopyLinkButtonClicked] = useState(false);
   // delay when copy link button changes from "Link copied!" to the default button
@@ -52,17 +52,19 @@ function FormBuilder({
   useEffect(() => {
     const elements = JSON.parse(form.content);
     setElements(elements);
+    setSelectedElement(null);
+    setIsReady(true);
     const readyTimeout = setTimeout(() => setIsReady(true), 500);
 
     return () => clearTimeout(readyTimeout);
-  }, [form, setElements]);
+  }, [form, setElements, isReady, setSelectedElement]);
 
   useEffect(() => {
     let copyLinkTimer = setTimeout(() =>
       setIsCopyLinkButtonClicked(false), copyLinkButtonDelay);
 
     return () => clearTimeout(copyLinkTimer);
-  }, [isCopyLinkButtonClicked === true]);
+  }, [isCopyLinkButtonClicked]);
 
   if (!isReady) {
     <div className="flex flex-col items-center justify-center w-full h-full">

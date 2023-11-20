@@ -1,18 +1,17 @@
 import { ElementTypes, FormElement, FormElementInstance } from "@/types/FormElement";
-import { Binary } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { z } from "zod";
 import DesignerComponent from "./DesignerComponent";
 import FormComponent from "./FormComponent";
 import PropertiesComponent from "./PropertiesComponent";
 
-const type: ElementTypes = "NumberField";
+const type: ElementTypes = "DateField";
 export type SubmitFunction = (key: string, value: string) => void;
 
 export const extraAtrributes = {
-  label: "Input",
+  label: "Date",
   helperText: "Helper text",
   required: false,
-  placeholder: "Enter value here..."
 };
 
 export type CustomInstance = FormElementInstance & {
@@ -28,7 +27,7 @@ export const propertiesSchema = z.object({
 
 export type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
-export const NumberFieldFormElement: FormElement = {
+export const DateFieldFormElement: FormElement = {
   type,
   construct: (id: string) => ({
     id,
@@ -36,8 +35,8 @@ export const NumberFieldFormElement: FormElement = {
     extraAttributes: extraAtrributes
   }),
   designerSidebarButtonElement: {
-    icon: <Binary />,
-    label: "Number"
+    icon: <Calendar />,
+    label: "Date"
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,

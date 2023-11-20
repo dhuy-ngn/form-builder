@@ -1,5 +1,8 @@
+import { CheckboxFieldFormElement } from '@/components/FormElements/CheckboxField';
+import { DateFieldFormElement } from '@/components/FormElements/DateField';
 import { HeaderFieldFormElement } from '@/components/FormElements/HeaderField';
 import { NumberFieldFormElement } from '@/components/FormElements/NumberField';
+import { SelectFieldFormElement } from '@/components/FormElements/SelectField';
 import { SeparatorFieldFormElement } from '@/components/FormElements/SeparatorField';
 import { SubheaderFieldFormElement } from '@/components/FormElements/SubheaderField';
 import {
@@ -14,7 +17,10 @@ export type ElementTypes =
   | 'SubheaderField'
   | 'TextareaField'
   | 'SeparatorField'
-  | 'NumberField';
+  | 'NumberField'
+  | 'DateField'
+  | 'SelectField'
+  | 'CheckboxField';
 
 export type FormElement = {
   type: ElementTypes;
@@ -50,5 +56,8 @@ export const FormElements: FormElementTypes = {
   SubheaderField: SubheaderFieldFormElement,
   TextareaField: TextareaFieldFormElement,
   SeparatorField: SeparatorFieldFormElement,
-  NumberField: NumberFieldFormElement
+  NumberField: NumberFieldFormElement,
+  DateField: DateFieldFormElement,
+  SelectField: SelectFieldFormElement,
+  CheckboxField: CheckboxFieldFormElement
 };

@@ -7,7 +7,7 @@ import PropertiesComponent from "./PropertiesComponent";
 const type: ElementTypes = "SeparatorField";
 
 export const SeparatorFieldFormElement: FormElement = {
-  type: 'SeparatorField',
+  type,
   construct: (id: string) => ({
     id,
     type,
