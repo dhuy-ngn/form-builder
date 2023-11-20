@@ -24,6 +24,7 @@ function FormDesignerSidebarElements() {
         <FormDesignerSidebarButton formElement={FormElements.NumberField} />
         <FormDesignerSidebarButton formElement={FormElements.DateField} />
         <FormDesignerSidebarButton formElement={FormElements.SelectField} />
+        <FormDesignerSidebarButton formElement={FormElements.MultiselectField} />
         <FormDesignerSidebarButton formElement={FormElements.CheckboxField} />
       </div>
     </div>

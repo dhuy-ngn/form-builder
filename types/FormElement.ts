@@ -1,6 +1,7 @@
 import { CheckboxFieldFormElement } from '@/components/FormElements/CheckboxField';
 import { DateFieldFormElement } from '@/components/FormElements/DateField';
 import { HeaderFieldFormElement } from '@/components/FormElements/HeaderField';
+import { MultiselectFieldFormElement } from '@/components/FormElements/MultiselectField';
 import { NumberFieldFormElement } from '@/components/FormElements/NumberField';
 import { SelectFieldFormElement } from '@/components/FormElements/SelectField';
 import { SeparatorFieldFormElement } from '@/components/FormElements/SeparatorField';
@@ -20,7 +21,8 @@ export type ElementTypes =
   | 'NumberField'
   | 'DateField'
   | 'SelectField'
-  | 'CheckboxField';
+  | 'CheckboxField'
+  | 'MultiselectField';
 
 export type FormElement = {
   type: ElementTypes;
@@ -59,5 +61,6 @@ export const FormElements: FormElementTypes = {
   NumberField: NumberFieldFormElement,
   DateField: DateFieldFormElement,
   SelectField: SelectFieldFormElement,
-  CheckboxField: CheckboxFieldFormElement
+  CheckboxField: CheckboxFieldFormElement,
+  MultiselectField: MultiselectFieldFormElement
 };

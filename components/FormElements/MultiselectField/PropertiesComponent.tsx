@@ -1,10 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/components/ui/use-toast";
 import useFormDesigner from "@/hooks/useFormDesigner";
 import { FormElementInstance } from "@/types/FormElement";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Minus, Plus } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { CustomInstance, propertiesFormSchemaType, propertiesSchema } from ".";
@@ -15,11 +18,11 @@ export default function PropertiesComponent(
   const element = elementInstance as CustomInstance;
   const form = useForm<propertiesFormSchemaType>({
     resolver: zodResolver(propertiesSchema),
-    mode: "onBlur",
+    mode: "onSubmit",
     defaultValues: {
       label: element.extraAttributes.label,
-      helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
+      options: element.extraAttributes.options,
     }
   });
 
@@ -28,13 +31,13 @@ export default function PropertiesComponent(
   }, [element, form]);
 
   const applyChanges = (values: propertiesFormSchemaType) => {
-    const { label, helperText, required } = values;
+    const { label, required, options } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
         label: label,
-        helperText: helperText,
         required: required,
+        options: options
       }
     });
 
@@ -48,7 +51,7 @@ export default function PropertiesComponent(
 
   return (
     <Form {...form}>
-      <form onBlur={
+      <form onSubmit={
         form.handleSubmit(applyChanges)
       }
         className="space-y-3">
@@ -64,29 +67,65 @@ export default function PropertiesComponent(
                 <Input {...field} />
               </FormControl>
               <FormDescription>
-                Displays next to the checkbox.
+                Displays <b>above</b> the field. <br /> Describe what this field is for.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )} />
 
-        {/* Helper text */}
+        {/* Options */}
         <FormField
           control={form.control}
-          name="helperText"
+          name="options"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Helper text</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
+              <div className="flex justify-between items-center">
+                <FormLabel>Options</FormLabel>
+                <Button
+                  variant={"outline"}
+                  className="gap-2"
+                  onClick={(e) => {
+                    e.preventDefault(); // avoid submit
+                    form.setValue(
+                      "options",
+                      field.value.concat(`Option ${field.value.length + 1}`));
+                  }}>
+                  <Plus className="h-4 w-4" />
+                  Add
+                </Button>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                {form.watch("options").map((option, index) => (
+                  <div key={index}
+                    className="flex items-center justify-between gap-1">
+                    <Input
+                      value={option}
+                      onChange={e => {
+                        field.value[index] = e.target.value;
+                        field.onChange(field.value);
+                      }} />
+                    <Button
+                      variant={"destructive"}
+                      disabled={field.value.length === 1}
+                      onClick={e => {
+                        e.preventDefault();
+                        const newOptions = [...field.value];
+                        newOptions.splice(index, 1);
+                        field.onChange(newOptions);
+                      }}>
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
               <FormDescription>
-                Displays below the label.
+                List of options to choose from. <br />
+                Must have at least one item.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )} />
-
 
         {/* Required */}
         <FormField
@@ -98,7 +137,7 @@ export default function PropertiesComponent(
               <div className="space-y-0.5">
                 <FormLabel>Required field</FormLabel>
                 <FormDescription>
-                  This field cannot be left empty on submit.
+                  Surveyees must pick at least one option.
                 </FormDescription>
               </div>
               <FormControl>
@@ -109,6 +148,14 @@ export default function PropertiesComponent(
               <FormMessage />
             </FormItem>
           )} />
+
+        <Separator />
+        <Button
+          className="w-full"
+          variant={"default"}
+          type="submit">
+          Save
+        </Button>
       </form>
     </Form >
   );

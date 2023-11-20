@@ -1,5 +1,7 @@
+import useFormDesigner from "@/hooks/useFormDesigner";
+import IdGenerator from "@/lib/IdGenerator";
 import { cn } from "@/lib/utils";
-import { FormElement } from "@/types/FormElement";
+import { ElementTypes, FormElement, FormElements } from "@/types/FormElement";
 import { useDraggable } from "@dnd-kit/core";
 import { Button } from "./ui/button";
 
@@ -11,6 +13,7 @@ function FormDesignerSidebarButton({
   formElement
 }: FormDesignerSidebarButtonProps) {
   const { label, icon } = formElement.designerSidebarButtonElement;
+  const { addElement, setSelectedElement, elements } = useFormDesigner();
   const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
     id: `designer-btn-${formElement.type}`,
     data: {
@@ -25,7 +28,15 @@ function FormDesignerSidebarButton({
       {...attributes}
       variant={"outline"}
       className={cn("flex flex-col gap-2 h-[120px] cursor-grab w-full",
-        isDragging && 'ring-2 ring-primary')}>
+        isDragging && 'ring-2 ring-primary')}
+      onDoubleClick={() => {
+        const type = formElement.type;
+
+        const newElement = FormElements[type as ElementTypes]
+          .construct(IdGenerator());
+        addElement(elements.length, newElement);
+        setSelectedElement(newElement);
+      }}>
       {icon}
       <p className="text-xs">{label}</p>
     </Button>

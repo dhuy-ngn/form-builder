@@ -1,4 +1,5 @@
-import { PublishForm } from "@/actions/FormActions";
+import { PublishForm, UpdateForm } from "@/actions/FormActions";
+import useFormDesigner from "@/hooks/useFormDesigner";
 import { Loader2, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
@@ -9,10 +10,12 @@ import { toast } from "./ui/use-toast";
 function PublishFormButton({ id }: { id: number; }) {
   const [loading, startTransition] = useTransition();
   const router = useRouter();
+  const { elements } = useFormDesigner();
 
   const publishForm = async () => {
     try {
-      await PublishForm(id);
+      const jsonElements = JSON.stringify(elements);
+      await UpdateForm(id, jsonElements).then(() => PublishForm(id));
       toast({
         title: "Success",
         description: "Your form has been saved"
@@ -31,7 +34,7 @@ function PublishFormButton({ id }: { id: number; }) {
       <AlertDialogTrigger>
         <Button variant={"default"} className="gap-2">
           <Upload className="h-4 w-4" />
-          Publish
+          Save and Publish
         </Button>
       </AlertDialogTrigger>
 
