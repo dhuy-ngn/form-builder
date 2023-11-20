@@ -53,7 +53,7 @@ export default function FormDesignerElementWrapper(
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={cn("relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-muted-focus ring-inset bg-muted",
+      className={cn("relative flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-muted-focus ring-inset bg-muted",
         isSelected && "ring-primary ring-2")}
       onMouseEnter={() => {
         setIsMouseOver(true);
@@ -109,7 +109,7 @@ export default function FormDesignerElementWrapper(
         )
       }
       <div
-        className={cn("flex w-full h-[120px] items-center rounded-md bg-muted/40 px-4 py-2 pointer-events-none",
+        className={cn("flex flex-col w-full justify-center items-center rounded-md bg-muted/40 px-4 py-4 pointer-events-none",
           isMouseOver && "opacity-20")}>
         <DesignerElement
           elementInstance={element} />

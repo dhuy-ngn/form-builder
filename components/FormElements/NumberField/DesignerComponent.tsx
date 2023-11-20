@@ -1,12 +1,12 @@
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { FormElementInstance } from "@/types/FormElement";
 import { CustomInstance } from ".";
 
 export default function DesignerComponent(
   { elementInstance }: { elementInstance: FormElementInstance; }) {
   const element = elementInstance as CustomInstance;
-  const { label, required, placeholder, helperText, rows } = element.extraAttributes;
+  const { label, required, placeholder, helperText } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
       <Label
@@ -19,7 +19,7 @@ export default function DesignerComponent(
           </span>
         )}
       </Label>
-      <Textarea rows={rows} readOnly disabled placeholder={placeholder} />
+      <Input readOnly disabled type="number" placeholder={placeholder} />
       {helperText && (
         <p className="text-muted-foreground text-[0.75rem]">
           {helperText}

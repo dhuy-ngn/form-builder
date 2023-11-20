@@ -1,4 +1,5 @@
 import { HeaderFieldFormElement } from '@/components/FormElements/HeaderField';
+import { NumberFieldFormElement } from '@/components/FormElements/NumberField';
 import { SeparatorFieldFormElement } from '@/components/FormElements/SeparatorField';
 import { SubheaderFieldFormElement } from '@/components/FormElements/SubheaderField';
 import {
@@ -12,7 +13,8 @@ export type ElementTypes =
   | 'HeaderField'
   | 'SubheaderField'
   | 'TextareaField'
-  | 'SeparatorField';
+  | 'SeparatorField'
+  | 'NumberField';
 
 export type FormElement = {
   type: ElementTypes;
@@ -47,5 +49,6 @@ export const FormElements: FormElementTypes = {
   HeaderField: HeaderFieldFormElement,
   SubheaderField: SubheaderFieldFormElement,
   TextareaField: TextareaFieldFormElement,
-  SeparatorField: SeparatorFieldFormElement
+  SeparatorField: SeparatorFieldFormElement,
+  NumberField: NumberFieldFormElement
 };

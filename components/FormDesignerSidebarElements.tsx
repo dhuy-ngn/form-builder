@@ -21,6 +21,7 @@ function FormDesignerSidebarElements() {
         <p className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start">Form elements</p>
         <FormDesignerSidebarButton formElement={FormElements.TextField} />
         <FormDesignerSidebarButton formElement={FormElements.TextareaField} />
+        <FormDesignerSidebarButton formElement={FormElements.NumberField} />
       </div>
     </div>
   );

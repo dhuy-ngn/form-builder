@@ -1,9 +1,9 @@
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { FormElementInstance } from "@/types/FormElement";
 import { useEffect, useState } from "react";
-import { CustomInstance, SubmitFunction, TextareaFieldFormElement, } from ".";
+import { CustomInstance, NumberFieldFormElement, SubmitFunction, } from ".";
 
 export default function FormComponent({
   elementInstance,
@@ -39,15 +39,15 @@ export default function FormComponent({
           </span>
         )}
       </Label>
-      <Textarea
-        rows={3}
+      <Input
+        type="number"
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
         onBlur={(e) => {
           if (!submitValue) return;
 
           const isValid =
-            TextareaFieldFormElement.validate(element, e.target.value);
+            NumberFieldFormElement.validate(element, e.target.value);
           setError(!isValid);
 
           if (!isValid) return;
