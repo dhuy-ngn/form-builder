@@ -9,7 +9,7 @@ export default function DesignerComponent(
   return (
     <div className="flex flex-col gap-2 w-full">
       <Label
-        className="flex flex-row gap-0.5 text-2xl text-bold">
+        className="flex flex-row gap-0.5 text-2xl font-bold">
         {title}
       </Label>
     </div>

@@ -29,7 +29,7 @@ export default function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-row gap-2 w-full p-6">
+    <div className="flex flex-row gap-2 w-full px-6 py-2">
       <Checkbox id={id}
         checked={value}
         className={cn(

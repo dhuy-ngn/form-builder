@@ -19,7 +19,7 @@ export default function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-2 w-full items-center px-8">
+    <div className="flex flex-col gap-2 w-full items-center px-8 py-2">
       <Separator className="bg-primary-foreground w-[90%]" />
     </div>
   );

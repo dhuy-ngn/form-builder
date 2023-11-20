@@ -22,9 +22,9 @@ export default function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-2 w-full p-6">
+    <div className="flex flex-col gap-2 w-full px-6 py-2">
       <Label
-        className={cn("flex flex-row gap-0.5 text-md text-bold text-muted",
+        className={cn("flex flex-row gap-0.5 text-md font-semibold",
           error && "text-destructive")}>
         {title}
       </Label>

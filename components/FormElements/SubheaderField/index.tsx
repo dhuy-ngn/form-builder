@@ -5,7 +5,7 @@ import DesignerComponent from "./DesignerComponent";
 import FormComponent from "./FormComponent";
 import PropertiesComponent from "./PropertiesComponent";
 
-const type: ElementTypes = "HeaderField";
+const type: ElementTypes = "SubheaderField";
 
 export const extraAtrributes = {
   title: "Subheader",

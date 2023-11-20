@@ -44,7 +44,7 @@ function FormDesignerSidebarButtonDragOverlayWrapper() {
 
       node = (
         <div
-          className="flex bg-muted border rounded-md h-[120px] w-full py-2 px-4 opacity-60 pointer pointer-events-none"
+          className="flex bg-muted border rounded-md w-full py-2 px-4 opacity-60 pointer pointer-events-none"
         >
           <DesignerElementComponent elementInstance={element} />
         </div>);

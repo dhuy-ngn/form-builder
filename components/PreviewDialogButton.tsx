@@ -30,7 +30,7 @@ function PreviewDialogButton() {
         <div
           className="bg-repeat bg-muted/80 h-full heropattern-graphpaper-muted-focus/20">
           <div
-            className="dark:bg-muted-focus/20 bg-muted-focus/60 mx-16 my-10 min-h-[500px] rounded-lg">
+            className="dark:bg-muted-focus/20 bg-muted-focus/60 mx-16 my-10 min-h-[500px] rounded-lg py-4">
             {elements.map(element => {
               const FormComponent = FormElements[element.type].formComponent;
               return (
