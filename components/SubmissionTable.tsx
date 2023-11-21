@@ -1,7 +1,10 @@
 import { GetFormSubmissions } from "@/actions/FormActions";
 import { ElementTypes, FormElementInstance } from "@/types/FormElement";
+import { format } from "date-fns";
 import formatDistance from "date-fns/formatDistance";
 import { ReactNode } from "react";
+import { Badge } from "./ui/badge";
+import { Checkbox } from "./ui/checkbox";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 
 type Row = { [key: string]: string; } & {
@@ -33,6 +36,12 @@ async function SubmissionTable({ id }: { id: number; }) {
   formElements.forEach(element => {
     switch (element.type) {
       case "TextField":
+      case "TextareaField":
+      case "SelectField":
+      case "MultiselectField":
+      case "DateField":
+      case "CheckboxField":
+      case "NumberField":
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
@@ -94,7 +103,30 @@ async function SubmissionTable({ id }: { id: number; }) {
 }
 
 function RowCell({ type, value }: { type: ElementTypes, value: string; }) {
-  let node: ReactNode = value;
+  let node: ReactNode = <></>;
+  switch (type) {
+    case "MultiselectField":
+      const stringifiedValue = JSON.parse(value)
+        .toString()
+        .replaceAll(",", ", ");
+      if (stringifiedValue)
+        node = stringifiedValue;
+      else
+        node = <span className="text-muted-foreground font-normal">
+          (no selection)
+        </span>;
+      break;
+    case "CheckboxField":
+      node = <Checkbox checked={value === "true"} disabled />;
+      break;
+    case "DateField":
+      node = <Badge variant={"outline"}>
+        {format(new Date(value), "dd/MM/yyyy")}
+      </Badge>;
+    default:
+      node = value;
+      break;
+  }
   return <TableCell>{node}</TableCell>;
 }
 

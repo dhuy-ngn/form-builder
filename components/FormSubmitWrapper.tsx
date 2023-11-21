@@ -54,6 +54,8 @@ function FormSubmitWrapper({
         description: "Form is currently not valid. Please double check the value and try again.",
         variant: "destructive"
       });
+
+      return;
     }
 
     try {
