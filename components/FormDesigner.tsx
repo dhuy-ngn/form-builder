@@ -42,6 +42,7 @@ function FormDesigner() {
         );
 
         addElement(elements.length, newElement);
+        setSelectedElement(newElement);
       }
 
       // Dropping a Sidebar Element Button over the elements in the Drop zone
@@ -78,6 +79,7 @@ function FormDesigner() {
         }
 
         addElement(newElementIndex, newElement);
+        setSelectedElement(newElement);
         return;
       }
 

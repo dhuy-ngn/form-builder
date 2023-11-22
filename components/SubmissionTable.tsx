@@ -123,6 +123,7 @@ function RowCell({ type, value }: { type: ElementTypes, value: string; }) {
       node = <Badge variant={"outline"}>
         {format(new Date(value), "dd/MM/yyyy")}
       </Badge>;
+      break;
     default:
       node = value;
       break;

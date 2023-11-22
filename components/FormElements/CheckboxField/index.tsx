@@ -50,6 +50,6 @@ export const CheckboxFieldFormElement: FormElement = {
       return currentValue !== "true";
     }
 
-    return element.extraAttributes.options.length > 0;
+    return true;
   }
 };
