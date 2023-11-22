@@ -22,7 +22,7 @@ export default function DesignerComponent(
       {options.map((option, index) => {
         const id = `checkbox-${element.id}-${index}`;
         return (
-          <div className="flex flex-row gap-2 w-full">
+          <div key={index} className="flex flex-row gap-2 w-full">
             <Checkbox
               id={id}
               className="border-primary-foreground" />
